@@ -9,9 +9,7 @@ This library provides :
 
 You can test it in CodeSandbox : [js version](https://codesandbox.io/s/epic-wildflower-v1jlww) or [ts version](https://codesandbox.io/s/react-mat-keyboard-ts-playground-w01638).
 
-:warning: This is using a fork of MathQuill in order to use the comma as a decimal separator and the symbol $\times$ instead of $\cdot$ for multiplication. This is not customizable so far, but could be in the future if there are requests for it.
-
-This library is used by [Mathlive.fr](https://www.mathlive.fr).
+A fork from the [original author](https://github.com/krirkrirk/react-math-keyboard)
 
 ## Basic usage
 
