@@ -47,7 +47,9 @@ export const Key = ({
       onClick?.()
     }
     if (postKeystrokes?.length) {
-      postKeystrokes.forEach((key) => mathfield.keystroke(key))
+      setTimeout(() => {
+        postKeystrokes.forEach((key) => mathfield.keystroke(key))
+      }, 10)
     }
   }
 

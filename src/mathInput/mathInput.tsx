@@ -267,6 +267,7 @@ export const MathInput = ({
             numericToolbarTabs={numericToolbarTabs}
             alphabeticToolbarKeys={alphabeticToolbarKeys}
             onHideKeyboard={onForceHideKeyboard}
+            onShowKeyboard={() => setShowKeyboard(true)}
             allowAlphabeticKeyboard={allowAlphabeticKeyboard}
             lang={lang}
           />

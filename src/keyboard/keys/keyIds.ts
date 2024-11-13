@@ -62,6 +62,7 @@ export type KeyId =
   | 'xsquare'
   | 'xcube'
   | 'fraction'
+  | 'slash'
 
   /**sets */
   | 'belongs'

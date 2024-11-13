@@ -9,6 +9,16 @@ import { ToolbarTabIds } from './toolbar/toolbarTabs'
 import { KeyId } from './keys/keyIds'
 import { Langs } from './keys/keyGroup'
 
+function endsWithFracClosingBrace(input: string) {
+  const sanitizedInput = input.replace(
+    /\\frac\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g,
+    '\\frac{}{}'
+  )
+
+  // Step 2: Check if the sanitized string ends with `\frac{}{}` followed by the closing brace
+  return sanitizedInput.endsWith('\\frac{}{}')
+}
+
 export type KeyboardProps = {
   numericToolbarKeys?: (KeyId | KeyProps)[]
   numericToolbarTabs?: ToolbarTabIds[]
@@ -16,6 +26,7 @@ export type KeyboardProps = {
   divisionFormat: 'fraction' | 'obelus'
   allowAlphabeticKeyboard: boolean
   onHideKeyboard?: () => void
+  onShowKeyboard?: () => void
   lang: Langs
 }
 
@@ -26,6 +37,7 @@ export const Keyboard = ({
   divisionFormat,
   allowAlphabeticKeyboard,
   onHideKeyboard,
+  onShowKeyboard,
   lang
 }: KeyboardProps) => {
   const mathfield = useContext(MathFieldContext)
@@ -34,13 +46,40 @@ export const Keyboard = ({
   }, [])
 
   const [currentLayoutType, setCurrentLayoutType] = useState('numeric')
+  const [location, setLocation] = useState('bottom')
 
   const onSwitch = () => {
     if (currentLayoutType === 'numeric') {
       mathfield.cmd('text')
+    } else {
+      // The reason for this condition is that when the user is adding a fraction
+      // and switches to the alphabet keyboard, when they are back the numeric keyboard
+      // it exits the fraction input, which is annoying if you want to do somethiing like a + b / 2
+      if (!endsWithFracClosingBrace(mathfield.latex())) {
+        mathfield.moveToRightEnd()
+      } else if (endsWithFracClosingBrace(mathfield.latex())) {
+        mathfield.keystroke('Right')
+      }
     }
+
     setCurrentLayoutType((prev) => (prev === 'numeric' ? 'alphabet' : 'numeric'))
   }
+
+  const onChangeLocation = (newLocation: string) => {
+    setLocation(newLocation)
+  }
+
+  useEffect(() => {
+    if (location === 'bottom') {
+      $(`#mq-keyboard-${mathfield.id}`).css('bottom', `0px`)
+      $(`#mq-keyboard-${mathfield.id}`).css('top', 'unset')
+    }
+
+    if (location === 'top') {
+      $(`#mq-keyboard-${mathfield.id}`).css('bottom', 'unset')
+      $(`#mq-keyboard-${mathfield.id}`).css('top', `0px`)
+    }
+  }, [location])
   // const onMouseUp = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
   //   if (e.target instanceof HTMLElement && e.target.nodeName !== "SELECT")
   //     e.preventDefault();
@@ -62,6 +101,8 @@ export const Keyboard = ({
           divisionFormat={divisionFormat}
           allowAlphabeticKeyboard={allowAlphabeticKeyboard}
           onHideKeyboard={onHideKeyboard}
+          onChangeLocation={onChangeLocation}
+          location={location}
           lang={lang}
         />
       )}

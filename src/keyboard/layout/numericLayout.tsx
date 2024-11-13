@@ -13,6 +13,8 @@ export type NumericLayoutProps = {
   onHideKeyboard?: () => void
   divisionFormat: 'fraction' | 'obelus'
   allowAlphabeticKeyboard: boolean
+  onChangeLocation?: (newLocation: string) => void
+  location: string
   lang: Langs
 }
 
@@ -23,6 +25,8 @@ export const NumericLayout = ({
   divisionFormat,
   allowAlphabeticKeyboard,
   onHideKeyboard,
+  onChangeLocation,
+  location,
   lang
 }: NumericLayoutProps) => {
   const hideToolbar = !!toolbarKeys && !toolbarKeys.length
@@ -41,8 +45,8 @@ export const NumericLayout = ({
         <div
           className="react-math-keyboard-layout-grid"
           style={{
-            gridTemplateColumns: 'repeat(2, minmax(0,1fr))',
-            flexGrow: 1
+            gridTemplateColumns: 'repeat(3, minmax(0,1fr))',
+            flexGrow: 2
           }}
         >
           <Key {...KeysPropsMap.get('leftParenthesis')!} />
@@ -54,8 +58,12 @@ export const NumericLayout = ({
           ) : (
             <Key {...KeysPropsMap.get('obelus')!} />
           )}
-          <Key {...KeysPropsMap.get('sqrt')!} />
+          <Key {...KeysPropsMap.get('slash')!} />
+
+          <Key {...KeysPropsMap.get('inf')!} />
+          <Key {...KeysPropsMap.get('sup')!} />
           <Key {...KeysPropsMap.get('square')!} />
+          <Key {...KeysPropsMap.get('sqrt')!} />
           {allowAlphabeticKeyboard ? (
             <Key id="switch" label={'abc'} labelType="raw" onClick={onSwitch} isUtilityKey />
           ) : (
@@ -63,6 +71,7 @@ export const NumericLayout = ({
           )}
 
           <Key {...KeysPropsMap.get('power')!} />
+          <Key {...KeysPropsMap.get('equal')!} />
         </div>
         <div
           className="react-math-keyboard-layout-grid"
@@ -98,6 +107,36 @@ export const NumericLayout = ({
 
           <Key {...KeysPropsMap.get('comma')!} />
           <Key {...KeysPropsMap.get('del')!} />
+        </div>
+
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '10px',
+            right: '10px'
+          }}
+        >
+          <button
+            className={`react-math-keyboard-key react-math-keyboard-key-utility`}
+            onClick={() => {
+              onChangeLocation && onChangeLocation(location === 'bottom' ? 'top' : 'bottom')
+            }}
+          >
+            {/* arrow up */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {location === 'bottom' ? <path d="M18 15l-6-6-6 6" /> : <path d="M6 9l6 6 6-6" />}
+            </svg>
+          </button>
         </div>
       </div>
     </div>

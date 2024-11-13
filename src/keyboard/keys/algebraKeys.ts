@@ -34,6 +34,15 @@ export const algebraKeysProps: KeyProps[] = [
     postKeystrokes: ['Left', 'Left']
   },
   {
+    id: 'slash',
+    label: '/',
+    labelType: 'tex',
+    mathfieldInstructions: {
+      content: '/',
+      method: 'write'
+    }
+  },
+  {
     id: 'leq',
     label: '\\leq',
     labelType: 'tex',

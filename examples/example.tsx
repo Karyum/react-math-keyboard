@@ -28,10 +28,42 @@ export const Example = ({}: ExampleProps) => {
             Input with all the keyboard keys :
           </p>
           <MathInput
-            setValue={setValue}
-            setMathfieldRef={(mathfield) => (mf.current = mathfield)}
-            lang="en"
-            numericToolbarKeys={['fraction']}
+            scrollType="window"
+            initialLatex={value || ''}
+            divisionFormat="obelus"
+            setMathfieldRef={(ref: any) => (mf.current = ref)}
+            setValue={(val: string) => {
+              setValue(val)
+            }}
+            size="small"
+            allowAlphabeticKeyboard
+            numericToolbarKeys={[
+              'approx',
+              'leq',
+              'geq',
+              'degree',
+              'cos',
+              'sin',
+              'tan',
+              'fraction',
+
+              {
+                id: 'angle',
+                label: '∠',
+                mathfieldInstructions: {
+                  method: 'write',
+                  content: '\\angle'
+                }
+              } as any,
+              'alpha',
+              'beta',
+              'gamma',
+              'delta',
+              'theta',
+              'pi',
+              'underscore'
+            ]}
+            numericToolbarTabs={['greek']}
           />
           <button onClick={() => clear(mf.current!)}>Clear</button>
           <p style={{ overflow: 'auto' }}>Latex produced : {value}</p>
