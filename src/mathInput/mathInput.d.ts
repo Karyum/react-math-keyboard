@@ -1,10 +1,10 @@
-import React from "react";
-import { MathField } from "../types/types";
-import { KeyProps } from "../keyboard/keys/key";
-import { ToolbarTabIds } from "../keyboard/toolbar/toolbarTabs";
-import { KeyId } from "../keyboard/keys/keyIds";
-import { Langs } from "../keyboard/keys/keyGroup";
-import { KeyboardThemeColor } from "../style/keyboardTheme";
+import React from 'react';
+import { MathField } from '../types/types';
+import { KeyProps } from '../keyboard/keys/key';
+import { ToolbarTabIds } from '../keyboard/toolbar/toolbarTabs';
+import { KeyId } from '../keyboard/keys/keyIds';
+import { Langs } from '../keyboard/keys/keyGroup';
+import { KeyboardThemeColor } from '../style/keyboardTheme';
 export type MathInputProps = {
     numericToolbarKeys?: (KeyId | KeyProps)[];
     numericToolbarTabs?: ToolbarTabIds[];
@@ -14,14 +14,14 @@ export type MathInputProps = {
     setClearRef?: (f: () => void) => void;
     initialLatex?: string;
     setValue?: (s: string) => void;
-    divisionFormat?: "fraction" | "obelus";
+    divisionFormat?: 'fraction' | 'obelus';
     color?: KeyboardThemeColor;
     style?: React.CSSProperties;
-    size?: "small" | "medium";
+    size?: 'small' | 'medium';
     rootElementId?: string;
     fullWidth?: boolean;
     container?: any;
-    scrollType?: "window" | "raw";
+    scrollType?: 'window' | 'raw';
     lang?: Langs;
     forbidOtherKeyboardKeys?: boolean;
     registerEmbedObjects?: {
@@ -31,4 +31,4 @@ export type MathInputProps = {
         latex: string;
     }[];
 };
-export declare const MathInput: ({ numericToolbarKeys, numericToolbarTabs, alphabeticToolbarKeys, setValue, setMathfieldRef, setClearRef, style, initialLatex, rootElementId, divisionFormat, color, size, fullWidth, allowAlphabeticKeyboard, scrollType, lang, forbidOtherKeyboardKeys, registerEmbedObjects, }: MathInputProps) => JSX.Element;
+export declare const MathInput: ({ numericToolbarKeys, numericToolbarTabs, alphabeticToolbarKeys, setValue, setMathfieldRef, setClearRef, style, initialLatex, rootElementId, divisionFormat, color, size, fullWidth, allowAlphabeticKeyboard, scrollType, lang, forbidOtherKeyboardKeys, registerEmbedObjects }: MathInputProps) => import("react/jsx-runtime").JSX.Element;
