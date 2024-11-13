@@ -1,29 +1,25 @@
-import { Key } from "./key";
-import React from "react";
-import { KeyId } from "./keyIds";
+import { Key } from './key'
+import React from 'react'
+import { KeyId } from './keyIds'
 
 export type LetterKeyProps = {
-  letter: KeyId;
-  isMaj?: boolean;
-  isInMathMode?: boolean;
-};
-export const LetterKey = ({
-  letter,
-  isMaj = false,
-  isInMathMode = true,
-}: LetterKeyProps) => {
-  const displayedLetter = isMaj ? letter.toLocaleUpperCase() : letter;
+  letter: KeyId
+  isMaj?: boolean
+  isInMathMode?: boolean
+}
+export const LetterKey = ({ letter, isMaj = false, isInMathMode = true }: LetterKeyProps) => {
+  const displayedLetter = isMaj ? letter.toLocaleUpperCase() : letter
   return (
     <Key
       id={letter}
       label={displayedLetter}
-      labelType={isInMathMode ? "tex" : "raw"}
+      labelType={isInMathMode ? 'tex' : 'raw'}
       mathfieldInstructions={{
         content: displayedLetter,
-        method: "write",
+        method: 'write'
       }}
       keypressId={displayedLetter}
-      groups={isMaj ? ["majLetters"] : ["minLetters"]}
+      groups={isMaj ? ['majLetters'] : ['minLetters']}
     />
-  );
-};
+  )
+}

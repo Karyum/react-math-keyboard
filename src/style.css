@@ -168,7 +168,7 @@
 }
 .react-math-keyboard-toolbar {
   display: flex;
-  max-width: 768px;
+  max-width: 1000px;
   column-gap: 0.5rem;
   justify-content: space-between;
   padding-right: 0.25rem;

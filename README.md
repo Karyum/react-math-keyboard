@@ -22,7 +22,7 @@ npm i react-math-keyboard
 Then import the MathInput :
 
 ```js
-import MathInput from "react-math-keyboard";
+import MathInput from 'react-math-keyboard'
 ```
 
 You can then use it with no configuration :
@@ -75,18 +75,18 @@ Example :
 ```js
 <MathInput
   numericToolbarKeys={[
-    "cos",
-    "sin",
-    "tan",
+    'cos',
+    'sin',
+    'tan',
     {
-      id: "custom",
-      label: "custom label",
-      labelType: "raw",
+      id: 'custom',
+      label: 'custom label',
+      labelType: 'raw',
       mathfieldInstructions: {
-        method: "write",
-        content: "custom content",
-      },
-    },
+        method: 'write',
+        content: 'custom content'
+      }
+    }
   ]}
 />
 ```
@@ -109,7 +109,3 @@ Example :
 | `size?: "small" \| "medium"`                    | `"medium"`    | Shorthand to change the padding of the input                                                                                                                                                                                                                            |
 | `rootElementId?: string`                        | `undefined`   | By default, the keyboard applies a padding bottom on the \<body\> in order to not overflow the input. You can use this prop to set this padding on another element than the body. For example, you can target Nextjs' root element by doing rootElementId = "\_\_next". |
 | `fullWidth?: boolean`                           | `true`        | Shorthand for `width="100%"`                                                                                                                                                                                                                                            |
-
-## Contributing
-
-Don't hesitate to give feedback, and any contribution is welcomed !

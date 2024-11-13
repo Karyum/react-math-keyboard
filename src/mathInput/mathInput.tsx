@@ -1,69 +1,69 @@
-import React, { useEffect, useRef, useState } from "react";
-import $ from "jquery";
-import { isMobile } from "react-device-detect";
-import { Keyboard, KeyboardProps } from "../keyboard/keyboard";
-import { MathField } from "../types/types";
-import { MathFieldContext } from "./mathfieldContext";
-import { KeyProps } from "../keyboard/keys/key";
-import { ToolbarTabIds } from "../keyboard/toolbar/toolbarTabs";
-import { KeyId } from "../keyboard/keys/keyIds";
-import { Langs } from "../keyboard/keys/keyGroup";
-import { KeysPropsMap } from "../keyboard/keys/keys";
-import { KeyboardThemeColor } from "../style/keyboardTheme";
-import { applyTheme } from "../style/applyTheme";
+import React, { useEffect, useRef, useState } from 'react'
+import $ from 'jquery'
+import { isMobile } from 'react-device-detect'
+import { Keyboard, KeyboardProps } from '../keyboard/keyboard'
+import { MathField } from '../types/types'
+import { MathFieldContext } from './mathfieldContext'
+import { KeyProps } from '../keyboard/keys/key'
+import { ToolbarTabIds } from '../keyboard/toolbar/toolbarTabs'
+import { KeyId } from '../keyboard/keys/keyIds'
+import { Langs } from '../keyboard/keys/keyGroup'
+import { KeysPropsMap } from '../keyboard/keys/keys'
+import { KeyboardThemeColor } from '../style/keyboardTheme'
+import { applyTheme } from '../style/applyTheme'
 
 export type MathInputProps = {
-  numericToolbarKeys?: (KeyId | KeyProps)[];
-  numericToolbarTabs?: ToolbarTabIds[];
-  alphabeticToolbarKeys?: (KeyId | KeyProps)[];
-  allowAlphabeticKeyboard?: boolean;
-  setMathfieldRef?: (mf: MathField) => void;
-  setClearRef?: (f: () => void) => void;
-  initialLatex?: string;
-  setValue?: (s: string) => void;
-  divisionFormat?: "fraction" | "obelus";
-  color?: KeyboardThemeColor;
-  style?: React.CSSProperties;
-  size?: "small" | "medium";
-  rootElementId?: string;
-  fullWidth?: boolean;
-  container?: any;
-  scrollType?: "window" | "raw";
-  lang?: Langs;
-  forbidOtherKeyboardKeys?: boolean;
+  numericToolbarKeys?: (KeyId | KeyProps)[]
+  numericToolbarTabs?: ToolbarTabIds[]
+  alphabeticToolbarKeys?: (KeyId | KeyProps)[]
+  allowAlphabeticKeyboard?: boolean
+  setMathfieldRef?: (mf: MathField) => void
+  setClearRef?: (f: () => void) => void
+  initialLatex?: string
+  setValue?: (s: string) => void
+  divisionFormat?: 'fraction' | 'obelus'
+  color?: KeyboardThemeColor
+  style?: React.CSSProperties
+  size?: 'small' | 'medium'
+  rootElementId?: string
+  fullWidth?: boolean
+  container?: any
+  scrollType?: 'window' | 'raw'
+  lang?: Langs
+  forbidOtherKeyboardKeys?: boolean
   registerEmbedObjects?: {
-    id: string;
-    htmlString: string;
-    text: string;
-    latex: string;
-  }[];
-};
+    id: string
+    htmlString: string
+    text: string
+    latex: string
+  }[]
+}
 
 const vanillaKeys = [
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "+",
-  "-",
-  ",",
-  "(",
-  ")",
-  "²",
-  "^",
-  "*",
-  "/",
-];
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '+',
+  '-',
+  ',',
+  '(',
+  ')',
+  '²',
+  '^',
+  '*',
+  '/'
+]
 
 const convertDoubleBackslashes = (str: string) => {
-  return str.replace(/\\\\/g, "\\");
-};
+  return str.replace(/\\\\/g, '\\')
+}
 
 export const MathInput = ({
   numericToolbarKeys,
@@ -75,66 +75,64 @@ export const MathInput = ({
   style = {},
   initialLatex,
   rootElementId,
-  divisionFormat = "fraction",
-  color = "grey",
-  size = "medium",
+  divisionFormat = 'fraction',
+  color = 'grey',
+  size = 'medium',
   fullWidth = true,
   allowAlphabeticKeyboard = true,
-  scrollType = "window",
-  lang = "en",
+  scrollType = 'window',
+  lang = 'en',
   forbidOtherKeyboardKeys = false,
-  registerEmbedObjects,
+  registerEmbedObjects
 }: MathInputProps) => {
-  const [loaded, setLoaded] = useState(false);
-  const [showKeyboard, setShowKeyboard] = useState(false);
+  const [loaded, setLoaded] = useState(false)
+  const [showKeyboard, setShowKeyboard] = useState(false)
 
-  const mathfield = useRef<MathField>({} as MathField);
+  const mathfield = useRef<MathField>({} as MathField)
 
-  const showKeyboardRequest = useRef<"close" | "open">();
-  const timeout = useRef<any>(null);
+  const showKeyboardRequest = useRef<'close' | 'open'>()
+  const timeout = useRef<any>(null)
 
-  const request = (type: "close" | "open") => {
-    if (type === "close" && showKeyboardRequest.current === "open") return;
-    if (timeout.current) clearTimeout(timeout.current);
+  const request = (type: 'close' | 'open') => {
+    if (type === 'close' && showKeyboardRequest.current === 'open') return
+    if (timeout.current) clearTimeout(timeout.current)
 
-    showKeyboardRequest.current = type;
+    showKeyboardRequest.current = type
     const eventually = () => {
-      setShowKeyboard(showKeyboardRequest.current === "open");
-      showKeyboardRequest.current = undefined;
-    };
-    timeout.current = setTimeout(eventually, 300);
-  };
+      setShowKeyboard(showKeyboardRequest.current === 'open')
+      showKeyboardRequest.current = undefined
+    }
+
+    if (type === 'close') eventually()
+    else timeout.current = setTimeout(eventually, 300)
+  }
 
   useEffect(() => {
-    if (!forbidOtherKeyboardKeys) return;
-    let keys: (string | undefined)[] = [...vanillaKeys];
+    if (!forbidOtherKeyboardKeys) return
+    let keys: (string | undefined)[] = [...vanillaKeys]
     if (numericToolbarKeys)
       keys.push(
         ...numericToolbarKeys.map((key) => {
-          return typeof key === "string"
-            ? KeysPropsMap.get(key)!.keypressId
-            : key.keypressId;
+          return typeof key === 'string' ? KeysPropsMap.get(key)!.keypressId : key.keypressId
         })
-      );
+      )
 
-    keys = keys.filter((e) => e !== undefined);
+    keys = keys.filter((e) => e !== undefined)
 
     const exec = (event: KeyboardEvent) => {
-      if (!keys.includes(event.key)) event.preventDefault();
-    };
-    const inputElement = document.getElementById(
-      `mq-keyboard-${idCounter.current}-container`
-    );
-    inputElement?.addEventListener("keypress", exec);
-    return () => inputElement?.removeEventListener("keypress", exec);
-  }, [forbidOtherKeyboardKeys, numericToolbarKeys]);
+      if (!keys.includes(event.key)) event.preventDefault()
+    }
+    const inputElement = document.getElementById(`mq-keyboard-${idCounter.current}-container`)
+    inputElement?.addEventListener('keypress', exec)
+    return () => inputElement?.removeEventListener('keypress', exec)
+  }, [forbidOtherKeyboardKeys, numericToolbarKeys])
 
-  const idCounter = useRef<number>(0);
+  const idCounter = useRef<number>(0)
   useEffect(() => {
-    window.jQuery = $;
-    require("mathquill4keyboard/build/mathquill.css");
-    require("mathquill4keyboard/build/mathquill");
-    let MQ = window.MathQuill.getInterface(2);
+    window.jQuery = $
+    require('mathquill4keyboard/build/mathquill.css')
+    require('mathquill4keyboard/build/mathquill')
+    let MQ = window.MathQuill.getInterface(2)
 
     if (registerEmbedObjects) {
       registerEmbedObjects.forEach((obj) => {
@@ -142,117 +140,114 @@ export const MathInput = ({
           return {
             htmlString: obj.htmlString,
             text: function text() {
-              return obj.text;
+              return obj.text
             },
             latex: function latex() {
-              return obj.latex;
-            },
-          };
-        });
-      });
+              return obj.latex
+            }
+          }
+        })
+      })
     }
 
     const mf = MQ.MathField(spanRef.current, {
       handlers: {
         edit: function () {
-          setValue?.(mf.latex());
-        },
-      },
-    }) as MathField;
-    idCounter.current = MQ(spanRef.current).id;
-    mathfield.current = mf;
-    const textarea = mf.el().querySelector("textarea");
-    isMobile && textarea?.setAttribute("readonly", "readonly");
-    textarea?.addEventListener("focusin", (e) => {
-      request("open");
-    });
-    setMathfieldRef?.(mf);
-    setClearRef?.(() => mf.latex(""));
-    setLoaded(true);
-  }, []);
+          setValue?.(mf.latex())
+        }
+      }
+    }) as MathField
+    idCounter.current = MQ(spanRef.current).id
+    mathfield.current = mf
+    const textarea = mf.el().querySelector('textarea')
+    isMobile && textarea?.setAttribute('readonly', 'readonly')
+    textarea?.addEventListener('focusin', (e) => {
+      request('open')
+    })
+    setMathfieldRef?.(mf)
+    setClearRef?.(() => mf.latex(''))
+    setLoaded(true)
+  }, [])
 
   useEffect(() => {
-    const onMouseDown = (e: MouseEvent) => {
+    const onMouseUp = (e: MouseEvent) => {
       if (e.target instanceof HTMLElement) {
-        let isKeyboardClick = false;
-        let isCloseKeyClick = false;
-        let element: HTMLElement | null = e.target;
+        let isKeyboardClick = false
+        let isCloseKeyClick = false
+        let element: HTMLElement | null = e.target
         while (element !== null) {
-          if (element.id.includes("close")) isCloseKeyClick = true;
+          if (element.id.includes('close')) isCloseKeyClick = true
           if (element.id.includes(`mq-keyboard-${idCounter.current}`)) {
-            isKeyboardClick = true;
-            break;
+            isKeyboardClick = true
+            break
           }
-          element = element.parentElement;
+          element = element.parentElement
         }
         if (!isKeyboardClick || isCloseKeyClick) {
-          request("close");
-        } else request("open");
+          request('close')
+        } else request('open')
       }
-    };
-    window.addEventListener("mousedown", onMouseDown);
-    return () => window.removeEventListener("mousedown", onMouseDown);
-  }, []);
+    }
+    window.addEventListener('mouseup', onMouseUp)
+    return () => window.removeEventListener('mouseup', onMouseUp)
+  }, [])
   const convertDoubleBackslashes = (str: string) => {
-    return str.replace(/\\\\/g, "\\");
-  };
-  const spanRef = useRef<HTMLSpanElement | null>(null);
-  const wasInitialLatexSet = useRef(false);
+    return str.replace(/\\\\/g, '\\')
+  }
+  const spanRef = useRef<HTMLSpanElement | null>(null)
+  const wasInitialLatexSet = useRef(false)
   useEffect(() => {
-    if (!loaded || !initialLatex) return;
-    if (wasInitialLatexSet.current) return;
-    mathfield.current.latex(convertDoubleBackslashes(initialLatex));
-    wasInitialLatexSet.current = true;
-  }, [loaded, initialLatex]);
+    if (!loaded || !initialLatex) return
+    if (wasInitialLatexSet.current) return
+    mathfield.current.latex(convertDoubleBackslashes(initialLatex))
+    wasInitialLatexSet.current = true
+  }, [loaded, initialLatex])
 
   useEffect(() => {
     if (showKeyboard) {
       if (rootElementId) {
-        $(`#${rootElementId}`).css("padding-bottom", `300px`);
+        $(`#${rootElementId}`).css('padding-bottom', `300px`)
       } else {
-        $("body").css("padding-bottom", `300px`);
+        $('body').css('padding-bottom', `300px`)
       }
-      const delta =
-        window.innerHeight - mathfield.current.el().getBoundingClientRect().top;
+      const delta = window.innerHeight - mathfield.current.el().getBoundingClientRect().top
       if (delta < 400) {
-        if (scrollType === "window")
-          window.scrollBy({ top: 400 - delta, behavior: "smooth" });
-        else mathfield.current.el().scrollIntoView({ behavior: "smooth" });
+        if (scrollType === 'window') window.scrollBy({ top: 400 - delta, behavior: 'smooth' })
+        else mathfield.current.el().scrollIntoView({ behavior: 'smooth' })
       }
       if (delta > window.innerHeight - 30)
-        if (scrollType === "window")
-          window.scrollBy({ top: -50, behavior: "smooth" });
-        else mathfield.current.el().scrollIntoView({ behavior: "smooth" });
+        if (scrollType === 'window') window.scrollBy({ top: -50, behavior: 'smooth' })
+        else mathfield.current.el().scrollIntoView({ behavior: 'smooth' })
     } else {
       if (rootElementId) {
-        $(`#${rootElementId}`).css("padding-bottom", 0);
+        $(`#${rootElementId}`).css('padding-bottom', 0)
       } else {
-        $("body").css("padding-bottom", 0);
+        $('body').css('padding-bottom', 0)
       }
     }
     return () => {
       if (rootElementId) {
-        $(`#${rootElementId}`).css("padding-bottom", 0);
+        $(`#${rootElementId}`).css('padding-bottom', 0)
       } else {
-        $("body").css("padding-bottom", 0);
+        $('body').css('padding-bottom', 0)
       }
-    };
-  }, [showKeyboard, rootElementId, scrollType]);
+    }
+  }, [showKeyboard, rootElementId, scrollType])
 
   useEffect(() => {
-    applyTheme(color);
-  }, [color, showKeyboard]);
+    applyTheme(color)
+  }, [color, showKeyboard])
 
   const onForceHideKeyboard = () => {
-    setShowKeyboard(false);
+    setShowKeyboard(false)
     // mathfield.current.blur();
-  };
+  }
   return (
     <div
       style={{
-        display: "flex",
-        width: fullWidth ? "100%" : "auto",
-        ...style,
+        display: 'flex',
+        width: fullWidth ? '100%' : 'auto',
+        ...style
       }}
       id={`mq-keyboard-${idCounter.current}-container`}
       className="react-math-keyboard-input-container"
@@ -260,7 +255,7 @@ export const MathInput = ({
       {!loaded && <p>Loading...</p>}
       <span
         className="react-math-keyboard-input"
-        style={{ padding: size === "small" ? "8px 4px" : "12px 6px" }}
+        style={{ padding: size === 'small' ? '8px 4px' : '12px 6px' }}
         id={`mq-keyboard-${idCounter.current}-field`}
         ref={spanRef}
       ></span>
@@ -278,5 +273,5 @@ export const MathInput = ({
         )}
       </MathFieldContext.Provider>
     </div>
-  );
-};
+  )
+}

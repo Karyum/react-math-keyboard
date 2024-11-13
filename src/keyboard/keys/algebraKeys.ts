@@ -1,100 +1,110 @@
-import { KeyProps } from "./key";
+import { KeyProps } from './key'
 
 export const algebraKeysProps: KeyProps[] = [
   {
-    id: "equal",
-    label: "=",
-    labelType: "tex",
-    keypressId: "=",
+    id: 'equal',
+    label: '=',
+    labelType: 'tex',
+    keypressId: '=',
     mathfieldInstructions: {
-      content: "=",
-      method: "write",
+      content: '=',
+      method: 'write'
     },
-    groups: ["algebra"],
+    groups: ['algebra']
   },
   {
-    id: "approx",
-    label: "\\approx",
-    labelType: "tex",
-
-    mathfieldInstructions: {
-      content: "\\approx",
-      method: "write",
-    },
-    groups: ["algebra"],
-  },
-  {
-    id: "leq",
-    label: "\\leq",
-    labelType: "tex",
+    id: 'approx',
+    label: '\\approx',
+    labelType: 'tex',
 
     mathfieldInstructions: {
-      content: "\\leq",
-      method: "write",
+      content: '\\approx',
+      method: 'write'
     },
-    groups: ["algebra"],
+    groups: ['algebra']
   },
   {
-    id: "geq",
-    label: "\\geq",
-    labelType: "tex",
+    id: 'fraction',
+    label: '\\frac{x}{y}',
+    labelType: 'tex',
+    mathfieldInstructions: {
+      content: '\\frac{}{}',
+      method: 'write'
+    },
+    postKeystrokes: ['Left', 'Left']
+  },
+  {
+    id: 'leq',
+    label: '\\leq',
+    labelType: 'tex',
 
     mathfieldInstructions: {
-      content: "\\geq",
-      method: "write",
+      content: '\\leq',
+      method: 'write'
     },
-    groups: ["algebra"],
+    groups: ['algebra']
   },
   {
-    id: "inf",
-    label: "<",
-    labelType: "tex",
+    id: 'geq',
+    label: '\\geq',
+    labelType: 'tex',
 
     mathfieldInstructions: {
-      content: "<",
-      method: "write",
+      content: '\\geq',
+      method: 'write'
     },
-    groups: ["algebra"],
-    keypressId: "<",
+    groups: ['algebra']
   },
   {
-    id: "sup",
-    label: ">",
-    labelType: "tex",
+    id: 'inf',
+    label: '<',
+    labelType: 'tex',
 
     mathfieldInstructions: {
-      content: ">",
-      method: "write",
+      content: '<',
+      method: 'write'
     },
-    groups: ["algebra"],
-    keypressId: ">",
+    groups: ['algebra'],
+    keypressId: '<'
   },
   {
-    id: "percent",
-    label: "\\%",
-    labelType: "tex",
-    groups: ["algebra"],
+    id: 'sup',
+    label: '>',
+    labelType: 'tex',
 
     mathfieldInstructions: {
-      content: "%",
-      method: "write",
+      content: '>',
+      method: 'write'
     },
-    keypressId: "%",
+    groups: ['algebra'],
+    keypressId: '>'
   },
   {
-    id: "xsquare",
-    label: "x^2",
-    labelType: "tex",
+    id: 'percent',
+    label: '\\%',
+    labelType: 'tex',
+    groups: ['algebra'],
 
-    mathfieldInstructions: { content: "x^2", method: "write" },
-    groups: ["algebra"],
+    mathfieldInstructions: {
+      content: '%',
+      method: 'write'
+    },
+    keypressId: '%'
   },
   {
-    id: "xcube",
-    label: "x^3",
-    labelType: "tex",
+    id: 'xsquare',
+    label: 'x^2',
+    labelType: 'tex',
 
-    mathfieldInstructions: { content: "x^3", method: "write" },
-    groups: ["algebra"],
+    mathfieldInstructions: { content: 'x^2', method: 'write' },
+    groups: ['algebra']
   },
-];
+  {
+    id: 'xcube',
+    label: 'x^3',
+    labelType: 'tex',
+
+    mathfieldInstructions: { content: 'x^3', method: 'write' },
+    groups: ['algebra']
+  }
+]
