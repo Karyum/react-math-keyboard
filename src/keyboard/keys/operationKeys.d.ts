@@ -1,2 +1,2 @@
-import { KeyProps } from "./key";
+import { KeyProps } from './key';
 export declare const operationKeysProps: KeyProps[];

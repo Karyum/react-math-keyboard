@@ -1,1 +1,1 @@
-declare module '@karyum/mathquill4keyboard/build/mathquill'
+declare module '@karyum/mathquill4keyboard/build/mathquill';
