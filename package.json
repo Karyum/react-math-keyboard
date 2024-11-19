@@ -65,8 +65,8 @@
     "webpack-dev-server": "^4.13.1"
   },
   "dependencies": {
+    "@karyum/mathquill4keyboard": "^0.10.10",
     "jquery": "^3.6.4",
-    "mathquill4keyboard": "^0.10.7",
     "react-device-detect": "^2.2.3"
   },
   "peerDependencies": {

@@ -10,7 +10,7 @@ export type KeyId =
 /**geometry */
  | 'overrightarrow' | 'degree' | 'vectorU'
 /**operations */
- | 'plus' | 'minus' | 'times' | 'frac' | 'obelus' | 'sqrt' | 'sqrtCub' | 'square' | 'cube' | 'power' | 'percent' | 'leftParenthesis' | 'rightParenthesis' | 'equal' | 'comma' | 'semicolon' | 'dot' | 'sup' | 'inf' | 'geq' | 'leq' | 'approx' | 'xsquare' | 'xcube' | 'fraction'
+ | 'plus' | 'minus' | 'times' | 'frac' | 'obelus' | 'sqrt' | 'sqrtCub' | 'square' | 'cube' | 'power' | 'percent' | 'leftParenthesis' | 'rightParenthesis' | 'equal' | 'comma' | 'semicolon' | 'dot' | 'sup' | 'inf' | 'geq' | 'leq' | 'approx' | 'xsquare' | 'xcube' | 'fraction' | 'slash'
 /**sets */
  | 'belongs' | 'notin' | 'cap' | 'cup' | 'lbrace' | 'rbrace' | 'lbracket' | 'rbracket' | 'varnothing' | 'naturals' | 'integers' | 'rationals' | 'decimals' | 'reals' | 'complex' | 'ast' | 'del' | 'right' | 'left' | 'rightarrow' | 'overrightarrow' | 'infty'
 /**fcts */

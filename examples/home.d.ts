@@ -1,2 +1,2 @@
-import "../src/style.css";
-import "mathquill4keyboard/build/mathquill.css";
+import '../src/style.css'
+import '@karyum/mathquill4keyboard/build/mathquill.css'

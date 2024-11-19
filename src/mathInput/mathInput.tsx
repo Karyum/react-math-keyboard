@@ -130,8 +130,8 @@ export const MathInput = ({
   const idCounter = useRef<number>(0)
   useEffect(() => {
     window.jQuery = $
-    require('mathquill4keyboard/build/mathquill.css')
-    require('mathquill4keyboard/build/mathquill')
+    require('@karyum/mathquill4keyboard/build/mathquill.css')
+    require('@karyum/mathquill4keyboard/build/mathquill')
     let MQ = window.MathQuill.getInterface(2)
 
     if (registerEmbedObjects) {

@@ -9,6 +9,7 @@ export type KeyboardProps = {
     divisionFormat: 'fraction' | 'obelus';
     allowAlphabeticKeyboard: boolean;
     onHideKeyboard?: () => void;
+    onShowKeyboard?: () => void;
     lang: Langs;
 };
-export declare const Keyboard: ({ numericToolbarKeys, numericToolbarTabs, alphabeticToolbarKeys, divisionFormat, allowAlphabeticKeyboard, onHideKeyboard, lang }: KeyboardProps) => import("react/jsx-runtime").JSX.Element;
+export declare const Keyboard: ({ numericToolbarKeys, numericToolbarTabs, alphabeticToolbarKeys, divisionFormat, allowAlphabeticKeyboard, onHideKeyboard, onShowKeyboard, lang }: KeyboardProps) => import("react/jsx-runtime").JSX.Element;

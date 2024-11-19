@@ -10,6 +10,8 @@ export type NumericLayoutProps = {
     onHideKeyboard?: () => void;
     divisionFormat: 'fraction' | 'obelus';
     allowAlphabeticKeyboard: boolean;
+    onChangeLocation?: (newLocation: string) => void;
+    location: string;
     lang: Langs;
 };
-export declare const NumericLayout: ({ toolbarKeys, toolbarTabs, onSwitch, divisionFormat, allowAlphabeticKeyboard, onHideKeyboard, lang }: NumericLayoutProps) => import("react/jsx-runtime").JSX.Element;
+export declare const NumericLayout: ({ toolbarKeys, toolbarTabs, onSwitch, divisionFormat, allowAlphabeticKeyboard, onHideKeyboard, onChangeLocation, location, lang }: NumericLayoutProps) => import("react/jsx-runtime").JSX.Element;

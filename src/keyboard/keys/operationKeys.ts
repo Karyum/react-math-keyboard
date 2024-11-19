@@ -1,162 +1,162 @@
-import { KeyProps } from "./key";
+import { KeyProps } from './key'
 
 export const operationKeysProps: KeyProps[] = [
   {
-    id: "plus",
-    label: "+",
-    labelType: "tex",
+    id: 'plus',
+    label: '+',
+    labelType: 'tex',
     mathfieldInstructions: {
-      content: "+",
-      method: "write",
+      content: '+',
+      method: 'write'
     },
-    groups: ["basicOperations"],
-    keypressId: "+",
+    groups: ['basicOperations'],
+    keypressId: '+'
   },
   {
-    id: "minus",
-    label: "-",
-    labelType: "tex",
-
-    mathfieldInstructions: {
-      content: "-",
-      method: "write",
-    },
-    groups: ["basicOperations"],
-    keypressId: "-",
-  },
-  {
-    id: "times",
-    label: "\\times",
-    labelType: "tex",
+    id: 'minus',
+    label: '-',
+    labelType: 'tex',
 
     mathfieldInstructions: {
-      content: "\\times",
-      method: "cmd",
+      content: '-',
+      method: 'write'
     },
-    groups: ["basicOperations"],
-    keypressId: "*",
+    groups: ['basicOperations'],
+    keypressId: '-'
   },
   {
-    id: "frac",
-    label: "\\div",
-    labelType: "tex",
+    id: 'times',
+    label: '\\cdot',
+    labelType: 'tex',
 
     mathfieldInstructions: {
-      content: "/",
-      method: "cmd",
+      content: '\\cdot',
+      method: 'cmd'
     },
-    groups: ["basicOperations"],
-    keypressId: "/",
+    groups: ['basicOperations'],
+    keypressId: '*'
   },
   {
-    id: "sqrt",
-    label: "\\sqrt{\\ }",
-    labelType: "tex",
+    id: 'frac',
+    label: '\\div',
+    labelType: 'tex',
 
     mathfieldInstructions: {
-      content: "\\sqrt",
-      method: "cmd",
+      content: '/',
+      method: 'cmd'
     },
-    groups: ["basicOperations"],
+    groups: ['basicOperations'],
+    keypressId: '/'
   },
   {
-    id: "sqrtCub",
-    label: "\\sqrt[3]{\\ }",
-    labelType: "tex",
+    id: 'sqrt',
+    label: '\\sqrt{\\ }',
+    labelType: 'tex',
 
     mathfieldInstructions: {
-      content: "\\nthroot3",
-      method: "typedText",
+      content: '\\sqrt',
+      method: 'cmd'
     },
-    groups: ["otherOperations"],
+    groups: ['basicOperations']
   },
   {
-    id: "square",
-    label: "\\square^2",
-    labelType: "tex",
-    groups: ["basicOperations"],
-    mathfieldInstructions: { content: "^2", method: "write" },
-    keypressId: "²",
-  },
-
-  {
-    id: "cube",
-    label: "\\square^3",
-    labelType: "tex",
-
-    mathfieldInstructions: { content: "^3 ", method: "write" },
-    groups: ["otherOperations"],
-  },
-
-  {
-    id: "power",
-    label: "\\square^n",
-    labelType: "tex",
-    groups: ["basicOperations"],
-
-    mathfieldInstructions: { content: "^", method: "cmd" },
-    keypressId: "^",
-  },
-
-  {
-    id: "leftParenthesis",
-    label: "(",
-    labelType: "tex",
-    groups: ["basicOperations"],
+    id: 'sqrtCub',
+    label: '\\sqrt[3]{\\ }',
+    labelType: 'tex',
 
     mathfieldInstructions: {
-      content: "(",
-      method: "typedText",
+      content: '\\nthroot3',
+      method: 'typedText'
     },
-    keypressId: "(",
+    groups: ['otherOperations']
   },
   {
-    id: "rightParenthesis",
-    label: ")",
-    labelType: "tex",
-    groups: ["basicOperations"],
-
-    mathfieldInstructions: {
-      content: ")",
-      method: "typedText",
-    },
-    keypressId: ")",
+    id: 'square',
+    label: '\\square^2',
+    labelType: 'tex',
+    groups: ['basicOperations'],
+    mathfieldInstructions: { content: '^2', method: 'write' },
+    keypressId: '²'
   },
 
   {
-    id: "comma",
-    label: "{,}",
-    labelType: "tex",
-    groups: ["basicOperations"],
+    id: 'cube',
+    label: '\\square^3',
+    labelType: 'tex',
+
+    mathfieldInstructions: { content: '^3 ', method: 'write' },
+    groups: ['otherOperations']
+  },
+
+  {
+    id: 'power',
+    label: '\\square^n',
+    labelType: 'tex',
+    groups: ['basicOperations'],
+
+    mathfieldInstructions: { content: '^', method: 'cmd' },
+    keypressId: '^'
+  },
+
+  {
+    id: 'leftParenthesis',
+    label: '(',
+    labelType: 'tex',
+    groups: ['basicOperations'],
 
     mathfieldInstructions: {
-      content: ",",
-      method: "write",
+      content: '(',
+      method: 'typedText'
     },
-    keypressId: ",",
+    keypressId: '('
   },
   {
-    id: "dot",
-    label: ".",
-    labelType: "tex",
-    groups: ["otherOperations"],
+    id: 'rightParenthesis',
+    label: ')',
+    labelType: 'tex',
+    groups: ['basicOperations'],
 
     mathfieldInstructions: {
-      content: ".",
-      method: "write",
+      content: ')',
+      method: 'typedText'
     },
-    keypressId: ".",
+    keypressId: ')'
+  },
+
+  {
+    id: 'comma',
+    label: '{,}',
+    labelType: 'tex',
+    groups: ['basicOperations'],
+
+    mathfieldInstructions: {
+      content: ',',
+      method: 'write'
+    },
+    keypressId: ','
   },
   {
-    id: "obelus",
-    label: "\\div",
-    labelType: "tex",
-    groups: ["basicOperations"],
+    id: 'dot',
+    label: '.',
+    labelType: 'tex',
+    groups: ['otherOperations'],
 
     mathfieldInstructions: {
-      content: "\\div",
-      method: "write",
+      content: '.',
+      method: 'write'
     },
-    keypressId: "/",
+    keypressId: '.'
   },
-];
+  {
+    id: 'obelus',
+    label: '\\div',
+    labelType: 'tex',
+    groups: ['basicOperations'],
+
+    mathfieldInstructions: {
+      content: '\\div',
+      method: 'write'
+    },
+    keypressId: '/'
+  }
+]
