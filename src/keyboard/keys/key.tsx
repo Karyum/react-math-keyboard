@@ -40,12 +40,21 @@ export const Key = ({
 
   const handleClick = () => {
     if (mathfieldInstructions) {
-      if (typeof mathfieldInstructions.content === 'string')
+      // Exit text mode before inserting any math commands
+      const latex = mathfield.latex()
+      if (latex.includes('\\text{') && !latex.trim().endsWith('}')) {
+        mathfield.keystroke('Escape')
+      }
+
+      if (typeof mathfieldInstructions.content === 'string') {
         mathfield[mathfieldInstructions.method](mathfieldInstructions.content)
-      else mathfield[mathfieldInstructions.method](mathfieldInstructions.content(mathfield.latex()))
+      } else {
+        mathfield[mathfieldInstructions.method](mathfieldInstructions.content(mathfield.latex()))
+      }
     } else {
       onClick?.()
     }
+
     if (postKeystrokes?.length) {
       setTimeout(() => {
         postKeystrokes.forEach((key) => mathfield.keystroke(key))

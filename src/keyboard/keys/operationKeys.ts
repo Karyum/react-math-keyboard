@@ -54,9 +54,10 @@ export const operationKeysProps: KeyProps[] = [
     labelType: 'tex',
 
     mathfieldInstructions: {
-      content: '\\sqrt',
-      method: 'cmd'
+      content: '\\sqrt{}',
+      method: 'write'
     },
+    postKeystrokes: ['Left Left', 'Delete Delete Delete Delete Delete', 'Right'],
     groups: ['basicOperations']
   },
   {
